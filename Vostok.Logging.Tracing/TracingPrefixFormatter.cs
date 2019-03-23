@@ -31,7 +31,7 @@ namespace Vostok.Logging.Tracing
                 chars[4 + 2 * i] = (char) (hexValue >> 16);
             }
 
-            return new string(chars);
+            return new string(chars, 0, 12);
         }
 
         private static uint[] CreateHexLookup()
