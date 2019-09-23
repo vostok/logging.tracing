@@ -11,6 +11,6 @@ namespace Vostok.Logging.Tracing
         /// <summary>
         /// Current trace identifier.
         /// </summary>
-        public const string TraceId = "TraceId";
+        public const string TraceId = "traceId";
     }
 }
