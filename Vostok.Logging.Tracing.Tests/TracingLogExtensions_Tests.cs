@@ -58,7 +58,7 @@ namespace Vostok.Logging.Tracing.Tests
         {
             wrappedLog.Log(originalEvent);
 
-            observedEvent.Properties?[WellKnownProperties.TraceContext].Should().Be($"[T-{tracer.CurrentContext?.TraceId.ToString().Substring(0, 8)}]");
+            observedEvent.Properties?[WellKnownProperties.TraceContext].Should().Be($"[T-{tracer.CurrentContext?.TraceId:N}]");
         }
     }
 }
