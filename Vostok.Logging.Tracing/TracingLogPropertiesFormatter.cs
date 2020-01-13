@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Vostok.Tracing.Abstractions;
 
@@ -49,20 +50,25 @@ namespace Vostok.Logging.Tracing
 
         [CanBeNull]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static unsafe string FormatSpanIdPrefix([CanBeNull] TraceContext context)
+        public static string FormatSpanIdPrefix([CanBeNull] TraceContext context) =>
+            FormatPrefix(context?.SpanId);
+
+        [CanBeNull]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static unsafe string FormatPrefix([CanBeNull] Guid? id)
         {
-            if (context == null)
+            if (id == null)
                 return null;
 
             var chars = stackalloc char[8];
-            var spanId = context.SpanId;
 
-            var a = *(int*)&spanId;
+            var idValue = id.Value;
+            var a = *(int*)&idValue;
 
             var offset = 0;
 
             offset = HexsToChars(chars, offset, a >> 24, a >> 16);
-            
+
             HexsToChars(chars, offset, a >> 8, a);
 
             return new string(chars, 0, 8);
