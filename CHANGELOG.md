@@ -1,3 +1,7 @@
+## 0.1.4 (18.01.2020):
+
+TracingLogPropertiesFormatter: exposed FormatPrefix method.
+
 ## 0.1.3 (10.01.2020):
 
 Full trace id in trace context log property.
