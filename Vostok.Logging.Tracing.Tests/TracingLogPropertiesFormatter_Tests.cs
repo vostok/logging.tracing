@@ -35,5 +35,19 @@ namespace Vostok.Logging.Tracing.Tests
 
             TracingLogPropertiesFormatter.FormatTraceContext(context).Should().Be(expectedValue);
         }
+
+        [Test]
+        public void FormatTraceId_should_return_null_for_null_context()
+            => TracingLogPropertiesFormatter.FormatTraceId(null).Should().BeNull();
+
+        [Test]
+        public void FormatTraceId_should_correctly_format_trace_context_with_full_trace_id()
+        {
+            var context = new TraceContext(Guid.NewGuid(), Guid.NewGuid());
+
+            var expectedValue = $"{context.TraceId:N}";
+
+            TracingLogPropertiesFormatter.FormatTraceId(context).Should().Be(expectedValue);
+        }
     }
 }
