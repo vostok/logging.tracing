@@ -1,3 +1,7 @@
+## 0.1.5 (02.04.2020):
+
+https://github.com/vostok/logging.tracing/issues/1
+
 ## 0.1.4 (18.01.2020):
 
 TracingLogPropertiesFormatter: exposed FormatPrefix method.
