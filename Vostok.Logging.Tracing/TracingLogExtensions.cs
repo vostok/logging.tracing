@@ -18,7 +18,7 @@ namespace Vostok.Logging.Tracing
         [NotNull]
         public static ILog WithTracingProperties([NotNull] this ILog log, [NotNull] ITracer tracer)
         {
-            log = log.WithProperty(TracingLogProperties.TraceId, () => tracer.CurrentContext?.TraceId);
+            log = log.WithProperty(TracingLogProperties.TraceId, () => TracingLogPropertiesFormatter.FormatTraceId(tracer.CurrentContext));
             log = log.WithProperty(WellKnownProperties.TraceContext, () => TracingLogPropertiesFormatter.FormatTraceContext(tracer.CurrentContext));
 
             return log;
