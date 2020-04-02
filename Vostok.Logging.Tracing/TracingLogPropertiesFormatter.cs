@@ -14,7 +14,6 @@ namespace Vostok.Logging.Tracing
             if (context == null)
                 return null;
 
-            var traceId = context.TraceId;
             var chars = stackalloc char[36];
             var offset = 0;
 
@@ -22,30 +21,25 @@ namespace Vostok.Logging.Tracing
             chars[offset++] = 'T';
             chars[offset++] = '-';
 
-            var a = *(int*)&traceId;
-            var b = *((short*)&traceId + 2);
-            var c = *((short*)&traceId + 3);
-            var d = *((byte*)&traceId + 8);
-            var e = *((byte*)&traceId + 9);
-            var f = *((byte*)&traceId + 10);
-            var g = *((byte*)&traceId + 11);
-            var h = *((byte*)&traceId + 12);
-            var i = *((byte*)&traceId + 13);
-            var j = *((byte*)&traceId + 14);
-            var k = *((byte*)&traceId + 15);
-
-            offset = HexsToChars(chars, offset, a >> 24, a >> 16);
-            offset = HexsToChars(chars, offset, a >> 8, a);
-            offset = HexsToChars(chars, offset, b >> 8, b);
-            offset = HexsToChars(chars, offset, c >> 8, c);
-            offset = HexsToChars(chars, offset, d, e);
-            offset = HexsToChars(chars, offset, f, g);
-            offset = HexsToChars(chars, offset, h, i);
-            offset = HexsToChars(chars, offset, j, k);
+            FormatTraceIdInternal(context.TraceId, chars, ref offset);
 
             chars[offset] = ']';
 
             return new string(chars, 0, 36);
+        }
+
+        [CanBeNull]
+        public static unsafe string FormatTraceId([CanBeNull] TraceContext context)
+        {
+            if (context == null)
+                return null;
+
+            var chars = stackalloc char[32];
+            var offset = 0;
+
+            FormatTraceIdInternal(context.TraceId, chars, ref offset);
+
+            return new string(chars, 0, 32);
         }
 
         [CanBeNull]
@@ -72,6 +66,31 @@ namespace Vostok.Logging.Tracing
             HexsToChars(chars, offset, a >> 8, a);
 
             return new string(chars, 0, 8);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe void FormatTraceIdInternal(Guid traceId, char* chars, ref int offset)
+        {
+            var a = *(int*)&traceId;
+            var b = *((short*)&traceId + 2);
+            var c = *((short*)&traceId + 3);
+            var d = *((byte*)&traceId + 8);
+            var e = *((byte*)&traceId + 9);
+            var f = *((byte*)&traceId + 10);
+            var g = *((byte*)&traceId + 11);
+            var h = *((byte*)&traceId + 12);
+            var i = *((byte*)&traceId + 13);
+            var j = *((byte*)&traceId + 14);
+            var k = *((byte*)&traceId + 15);
+
+            offset = HexsToChars(chars, offset, a >> 24, a >> 16);
+            offset = HexsToChars(chars, offset, a >> 8, a);
+            offset = HexsToChars(chars, offset, b >> 8, b);
+            offset = HexsToChars(chars, offset, c >> 8, c);
+            offset = HexsToChars(chars, offset, d, e);
+            offset = HexsToChars(chars, offset, f, g);
+            offset = HexsToChars(chars, offset, h, i);
+            offset = HexsToChars(chars, offset, j, k);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

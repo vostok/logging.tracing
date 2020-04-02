@@ -50,7 +50,7 @@ namespace Vostok.Logging.Tracing.Tests
         {
             wrappedLog.Log(originalEvent);
 
-            observedEvent.Properties?[TracingLogProperties.TraceId].Should().Be(tracer.CurrentContext?.TraceId);
+            observedEvent.Properties?[TracingLogProperties.TraceId].Should().Be(tracer.CurrentContext?.TraceId.ToString("N"));
         }
 
         [Test]
