@@ -1,0 +1,9 @@
+const Vostok.Logging.Tracing.TracingLogProperties.TraceId = "traceId" -> string
+static Vostok.Logging.Tracing.TracingLogExtensions.WithTracingProperties(this Vostok.Logging.Abstractions.ILog log, Vostok.Tracing.Abstractions.ITracer tracer) -> Vostok.Logging.Abstractions.ILog
+static Vostok.Logging.Tracing.TracingLogPropertiesFormatter.FormatPrefix(System.Guid? id) -> string
+static Vostok.Logging.Tracing.TracingLogPropertiesFormatter.FormatSpanIdPrefix(Vostok.Tracing.Abstractions.TraceContext context) -> string
+static Vostok.Logging.Tracing.TracingLogPropertiesFormatter.FormatTraceContext(Vostok.Tracing.Abstractions.TraceContext context) -> string
+static Vostok.Logging.Tracing.TracingLogPropertiesFormatter.FormatTraceId(Vostok.Tracing.Abstractions.TraceContext context) -> string
+Vostok.Logging.Tracing.TracingLogExtensions
+Vostok.Logging.Tracing.TracingLogProperties
+Vostok.Logging.Tracing.TracingLogPropertiesFormatter
