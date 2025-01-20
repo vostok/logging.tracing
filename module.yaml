@@ -9,6 +9,25 @@ notests *default:
     - Vostok.Logging.Tracing/bin/Release/netstandard2.0/Vostok.Logging.Tracing.dll
     - module vostok.logging.abstractions
     - module vostok.tracing.abstractions
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/netstandard2.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/net6.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/net8.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
 
   deps:
     - vostok.devtools
@@ -16,6 +35,30 @@ notests *default:
     - vostok.tracing.abstractions
 
 full-build > notests:
+  install:
+    - Vostok.Logging.Tracing/bin/Release/netstandard2.0/Vostok.Logging.Tracing.dll
+    - module vostok.logging.abstractions
+    - module vostok.tracing.abstractions
+    - groups:
+        - target-framework: "netstandard2.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/netstandard2.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
+        - target-framework: "net6.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/net6.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
+        - target-framework: "net8.0"
+          libraries:
+            - Vostok.Logging.Tracing/bin/Release/net8.0/Vostok.Logging.Tracing.dll
+          modules:
+            - name: vostok.logging.abstractions
+            - name: vostok.tracing.abstractions
+
   deps:
     - -vostok.devtools
     - vostok.devtools@with-net6.0
